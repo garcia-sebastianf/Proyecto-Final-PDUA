@@ -1,4 +1,3 @@
-# Proyecto-Final-PDUA
 # Proyecto Final PDUA
 Grupo 6 - Jueves
 Juanita Marulanda, Sebastian García y Daniel Toro
