@@ -1,0 +1,178 @@
+COND_1: MOV ACC, CTE    #ACC <= address_Q
+		address_Q
+		MOV DPTR, ACC   #DPTR <= address_Q
+		MOV ACC, [DPTR]	#ACC  <= Q
+		MOV A, ACC		#A    <= Q 
+		MOV ACC, CTE    #ACC  <= 0x01
+		0x01
+		AND ACC, A		#ACC <= 0001 O 0000
+		MOV A, ACC      #A   <= 0001 O 0000
+		MOV ACC, CTE    #ACC <= address_Q_1
+		address_Q_1
+		MOV DPTR, ACC   #DPTR <= address_Q_1
+		MOV ACC, [DPTR]	#ACC  <= Q_1
+		XOR ACC, A      #ACC  <= 0000 O 0001
+		JZ 
+		ARITH_ST
+		MOV ACC, A      #ACC <= 0001 O 0000
+		JZ
+		COND01
+COND10:	MOV ACC, CTE	#ACC <= address_M
+		address_m	
+		MOV DPTR, ACC   #DPTR <= address_M
+		MOV ACC, [DPTR]	#ACC  <= M
+		NEG	ACC			#ACC  <= -M
+		MOV A, ACC		#A    <= -M
+		MOV ACC, CTE	#ACC <= address_A
+		address_A	
+		MOV DPTR, ACC   #DPTR <= address_A
+		MOV ACC, [DPTR]	#ACC  <= A
+		ADD ACC, A      #ACC  <= A-M
+		MOV A, ACC 		#A	  <= A-M
+		MOV ACC, CTE	#ACC <= address_A
+		address_A
+		MOV DPTR, ACC	#DPTR <= Adress_A
+		MOV ACC, A 		#ACC  <= A-M
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+		JMP CTE
+		ARITST
+COND01:	MOV ACC, CTE	#ACC <= address_M
+		address_m	
+		MOV DPTR, ACC   #DPTR <= address_M
+		MOV ACC, [DPTR]	#ACC  <= M
+		MOV A, ACC		#A    <= M
+		MOV ACC, CTE	#ACC <= address_A
+		address_A	
+		MOV DPTR, ACC   #DPTR <= address_A
+		MOV ACC, [DPTR]	#ACC  <= A
+		ADD ACC, A      #ACC  <= M + A
+		MOV A, ACC 		#A	  <= A+M
+		MOV ACC, CTE	#ACC <= address_A
+		address_A
+		MOV DPTR, ACC	#DPTR <= Adress_A
+		MOV ACC, A 		#ACC  <= A+M
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+ARITST:	MOV ACC, CTE	#ACC <= address_A
+		address_A
+		MOV DPTR, ACC	#DPTR <= Adress_A
+		MOV ACC, [DPTR] #ACC <= A
+		MOV A, ACC 		#A   <= ACC
+		MOV ACC, CTE    #ACC  <= 0x01
+		0x01
+		AND ACC, A		#ACC <= 0001 O 0000
+		MOV A, ACC      #A   <= 0001 O 0000
+		MOV ACC, CTE	#ACC <= address_temp
+		address_temp
+		MOV DPTR, ACC	#DPTR <= Adress_Temp
+		MOV ACC, A 		#ACC  <= 0001 O 0000
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+		MOV ACC, CTE	#ACC <= address_A
+		address_A
+		MOV DPTR, ACC	#DPTR <= Adress_A
+		MOV ACC, [DPTR] #ACC <= A
+		MOV A, ACC 		#A   <= ACC
+		MOV ACC, CTE    #ACC  <= 0x10
+		0x80
+		AND ACC, A		#ACC <= 1000 O 0000
+		JZ 
+		ST_A0
+ST_A1:	MOV ACC, CTE	#ACC <= address_A
+		address_A
+		MOV DPTR, ACC	#DPTR <= Adress_A
+		MOV ACC, [DPTR] #ACC <= A
+		SLR	ACC			#Shift logic rigth ACC
+		MOV A, ACC		#A <= ACC
+		MOV ACC, CTE	#ACC <= 1000
+		0x80
+		ADD ACC, A		#ACC <= ACC+A
+		JMP CTE
+		STOREA
+ST_A0:	MOV ACC, A      #ACC <= A 
+		SLR	ACC			#Shift logic rigth ACC
+STOREA: MOV A, ACC		#A <= ACC
+		MOV ACC, CTE	#ACC <= address_A
+		address_A
+		MOV DPTR, ACC	#DPTR <= Adress_A
+		MOV ACC, A 		#ACC  <= A
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+ST_Q:	MOV ACC, CTE	#ACC <= address_Q
+		address_Q
+		MOV DPTR, ACC	#DPTR <= Adress_Q
+		MOV ACC, [DPTR] #ACC <= Q
+		MOV A, ACC		#A <= ACC
+		MOV	ACC, CTE	#ACC <= 0X01
+		0x01
+		AND ACC, A		#ACC <= ACC AND A
+		MOV A, ACC		#A <= ACC
+		MOV ACC, CTE	#ACC <= address_temp2
+		address_temp2
+		MOV DPTR, ACC	#DPTR <= Adress_Temp2
+		MOV ACC, A 		#ACC  <= 0001 O 0000
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+		MOV ACC, CTE	#ACC <= address_temp
+		address_temp
+		MOV DPTR, ACC	#DPTR <= Adress_temp
+		MOV ACC, [DPTR] #ACC <= temp
+		MOV A, ACC
+		JZ
+		E_TEMP
+		MOV ACC,CTE
+		0x80
+E_TEMP:	MOV A, ACC		#A <= ACC
+		MOV ACC, CTE	#ACC <= address_Q
+		address_Q
+		MOV DPTR, ACC	#DPTR <= Adress_Q
+		MOV ACC, [DPTR] #ACC <= Q
+		SLR	ACC			#Shift logic rigth ACC
+		ADD ACC, A		#ACC <= ACC+A
+		MOV A, ACC		#A <= ACC
+		MOV ACC, CTE	#ACC <= address_Q
+		address_Q
+		MOV DPTR, ACC	#DPTR <= Adress_Q
+		MOV ACC, A 		#ACC  <= Q
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+SQ_1:	MOV ACC, CTE	#ACC <= address_temp2
+		address_temp2
+		MOV DPTR, ACC	#DPTR <= Adress_temp2
+		MOV ACC, [DPTR] #ACC <= temp2
+		MOV A, ACC		#A <= ACC
+		MOV ACC, CTE	#ACC <= address_Q1
+		address_Q1
+		MOV DPTR, ACC	#DPTR <= Adress_Q1
+		MOV ACC, A 		#ACC  <= 0001 O 0000
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+		MOV ACC, CTE	#ACC <= address_N
+		address_N
+		MOV DPTR, ACC	#DPTR <= Adress_N
+		MOV ACC, [DPTR] #ACC <= N
+		MOV A, ACC		#A <= ACC
+		MOV ACC, CTE	#ACC <= -1
+		0xFF
+		ADD ACC, A		#ACC <= -1+N
+		JZ
+		END
+		MOV A, ACC		#A <= -1+N
+		MOV ACC, CTE	#ACC <= address_N
+		address_N
+		MOV DPTR, ACC	#DPTR <= Adress_N
+		MOV ACC, A 		#ACC  <= -1+N
+		MOV [DPTR], ACC #Store ACC in [DPTR]
+		JMP CTE
+		COND_1
+END:	MOV ACC, CTE	#ACC <= address_Q
+		address_Q
+		MOV DPTR, ACC	#DPTR <= Adress_Q
+		MOV ACC, [DPTR] #ACC <= Q
+		MOV A, ACC		#A <= Q
+		MOV ACC, CTE	#ACC <= address_A
+		address_A
+		MOV DPTR, ACC	#DPTR <= Adress_A
+		MOV ACC, [DPTR] #ACC <= A
+		HALT
+A:			0x00
+M:			0x66
+Q:			0x60
+Q_1:		0x00
+N:			0x08
+Temp:		0x00
+Temp2:		0x00
