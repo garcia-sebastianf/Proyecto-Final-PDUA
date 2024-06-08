@@ -10,7 +10,8 @@ E implementado queda de la siguiente manera:
 ![image](https://user-images.githubusercontent.com/98425604/172173931-2edf19d0-c6de-4a49-87c7-94f7e9309633.png)
 
 Nosotros desarrollamos este algoritmo, utilizando la PDUA lo implementamos y el resulado dió de la siguiente manera:
-![image](https://user-images.githubusercontent.com/98425604/172175990-214b7b75-0384-4729-b716-52a90780e58b.png)
+![172175990-214b7b75-0384-4729-b716-52a90780e58b-transformed](https://github.com/garcia-sebastianf/Proyecto-Final-PDUA/assets/76495580/ca570cfd-732c-4e1e-a5fb-1f9e6c555158)
+
 
 Donde array_reg(3) corresponde a 'A' y array_reg(7) corresponde a 'ACC' y el resultado es 'ACC''A', por ende quería: 00100110 01000000 lo cual a el mismo resultado del algoritmo de booth realizado de manera manual.
 
